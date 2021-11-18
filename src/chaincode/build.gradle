@@ -1,0 +1,35 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+plugins {
+    id 'application'
+    id 'checkstyle'
+    id 'jacoco'
+}
+
+group 'chaincode'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    compileOnly 'chaincode:fabric-chaincode-shim:2.+'
+    implementation 'com.owlike:genson:1.5'
+    testImplementation 'chaincode:fabric-chaincode-shim:2.+'
+}
+
+repositories {
+    maven {
+        url "https://hyperledger.jfrog.io/hyperledger/fabric-maven"
+    }
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+}
+
+
+installDist.dependsOn check
